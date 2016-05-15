@@ -1,0 +1,31 @@
+body{
+	text-align:center;
+    font-family: helvetica, arial, sans-serif;
+}
+.column {
+	width: 400px;
+	height: 100%;
+	background-color:orange;
+	display:inline-block;	
+}
+
+.add {
+    float: right;
+    margin-right: 20px;
+}
+
+.cartInput {
+    font-size: 14px;
+    background-color: #ff0000;
+    display: block;
+    width: 80%;
+}
+
+.toggleInput{
+    width: 15px;
+    height: 15px;
+    background-color: #00ff00;
+    display: inline;
+    
+    margin-left: 90%;
+}
