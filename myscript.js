@@ -37,12 +37,19 @@ function toggleDraggable(menupoint){
     menupoint.draggable = !(menupoint.draggable);
 }
 
+
+function addListeners(menupoint){
+    menupoint.addEventListener("dragstart", dragStart);
+    menupoint.addEventListener("dragend", dragEnd);
+}
+
 function dragStart(event){
     this.style.opacity = '0.75';
 }
 
-function addListeners(menupoint){
-    menupoint.addEventListener("dragstart", dragStart);
+function dragEnd(event){
+    console.log(this.style.opacity);
+    this.style.opacity = '1';
 }
 
 function toggleInput(event){
