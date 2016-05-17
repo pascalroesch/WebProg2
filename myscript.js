@@ -11,10 +11,14 @@ function addCart () {
     var cart = document.createElement("input");
     cart.placeholder = "Hier etwas eingeben";
     cart.classList.add("cartInput");
-
+    
     var pen = document.createElement("img");
     pen.src = "img/IconPen.png";
     pen.classList.add("pen");
+    
+    menupoint.draggable = false;
+    cart.draggable = false;
+    pen.draggable = false;
 
     menupoint.appendChild(cart);
     menupoint.appendChild(pen);
@@ -34,22 +38,53 @@ function addCart () {
 }
 
 function toggleDraggable(menupoint){
-    menupoint.draggable = !(menupoint.draggable);
+    menupoint.lastChild.draggable = !(menupoint.lastChild.draggable);
+
+    /*var menuquery = menupoint.childNodes;
+    for (var i = 0; i < menuquery.length; i++) {
+        menuquery[i].draggable = !(menuquery[i].draggable);
+        console.log(menuquery[i] + '  ' + menuquery[i].draggable);
+    }*/
 }
 
 
 function addListeners(menupoint){
-    menupoint.addEventListener("dragstart", dragStart);
-    menupoint.addEventListener("dragend", dragEnd);
+    menupoint.lastChild.addEventListener("dragstart", dragStart);
+    menupoint.lastChild.addEventListener("dragend", dragEnd);
+    menupoint.lastChild.addEventListener("dragenter", dragEnter);
+    menupoint.lastChild.addEventListener("dragleave", dragLeave)
+
+    /*var menuquery = menupoint.childNodes;
+    for (var i = 0; i < menuquery.length; i++) {    //input irgendwie nicht draggable
+        menuquery[i].addEventListener("dragstart", dragStart);
+        menuquery[i].addEventListener("dragend", dragEnd);
+    }*/
 }
 
 function dragStart(event){
-    this.style.opacity = '0.75';
+    console.log("dragStart");
+    dragSource = this.parentNode;
+    dragSource.style.opacity = '0.2';
+
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/html', this.innerHTML)
 }
 
 function dragEnd(event){
-    console.log(this.style.opacity);
-    this.style.opacity = '1';
+    console.log("dragEnd");
+    this.parentNode.style.opacity = '1';
+}
+
+function dragEnter(event){
+    console.log(event);
+    if(event.target.className == 'column'){
+        console.log("TROLOLOL");
+        event.target.classList.add("divOver");
+    }
+}
+
+function dragLeave(event){
+
 }
 
 function toggleInput(event){
@@ -57,6 +92,7 @@ function toggleInput(event){
     toggleDraggable(parent);
     var cart = parent.firstChild;
 
-    cart.disabled = !(cart.disabled); //readonly funktioniert irgendwie (noch) nicht; mit disabled möglich, aber nicht mehr schön, unschönes lösbar mit background-color&color
+    cart.readOnly = !(cart.readOnly); 
     cart.classList.toggle("cartStyle");
 }
+
