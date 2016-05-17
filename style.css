@@ -29,8 +29,8 @@ h1{
 }
 
 .cartStyle{
-    box-shadow: 2px 2px 2px 2px #666666;
-    border: none;
+    box-shadow: 2px 2px 1px 1px #666666;
+    border: 1px groove #666666;
 
     background-color: white;
     color: #000;
@@ -70,3 +70,14 @@ h1{
     width: 32px;
 }
 
+.divOver{
+    border: 2px dashed #000;
+}
+
+[draggable = true]{
+    cursor: move;
+}
+
+[draggable = false]{
+    cursor: default;
+}
