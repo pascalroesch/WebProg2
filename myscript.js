@@ -24,8 +24,6 @@ function addCart () {
     menupoint.appendChild(pen);
     element.appendChild(menupoint);
 
-    //toggleDraggable(menupoint);
-
     addListeners(menupoint);
     
     pen.addEventListener("click", toggleInput);
@@ -38,13 +36,8 @@ function addCart () {
 }
 
 function toggleDraggable(menupoint){
+    menupoint.firstChild.draggable = !(menupoint.firstChild.draggable);
     menupoint.lastChild.draggable = !(menupoint.lastChild.draggable);
-
-    /*var menuquery = menupoint.childNodes;
-    for (var i = 0; i < menuquery.length; i++) {
-        menuquery[i].draggable = !(menuquery[i].draggable);
-        console.log(menuquery[i] + '  ' + menuquery[i].draggable);
-    }*/
 }
 
 
@@ -52,22 +45,23 @@ function addListeners(menupoint){
     menupoint.lastChild.addEventListener("dragstart", dragStart);
     menupoint.lastChild.addEventListener("dragend", dragEnd);
     menupoint.lastChild.addEventListener("dragenter", dragEnter);
-    menupoint.lastChild.addEventListener("dragleave", dragLeave)
+    menupoint.lastChild.addEventListener("dragleave", dragLeave);
 
-    /*var menuquery = menupoint.childNodes;
-    for (var i = 0; i < menuquery.length; i++) {    //input irgendwie nicht draggable
-        menuquery[i].addEventListener("dragstart", dragStart);
-        menuquery[i].addEventListener("dragend", dragEnd);
-    }*/
+    menupoint.firstChild.addEventListener("dragstart", dragStart);
+    menupoint.firstChild.addEventListener("dragend", dragEnd);
+    menupoint.firstChild.addEventListener("dragenter", dragEnter);
+    menupoint.firstChild.addEventListener("dragleave", dragLeave);
+
 }
 
 function dragStart(event){
-    console.log("dragStart");
+    console.log("dragStart: " + this);
     dragSource = this.parentNode;
-    dragSource.style.opacity = '0.2';
+    dragSource.style.opacity = '0.25';
 
     event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('text/html', this.innerHTML)
+    event.dataTransfer.setData('text', event.target);
+    console.log(event.dataTransfer.getData('text'))
 }
 
 function dragEnd(event){
@@ -78,13 +72,16 @@ function dragEnd(event){
 function dragEnter(event){
     console.log(event);
     if(event.target.className == 'column'){
-        console.log("TROLOLOL");
+        console.log("enter");
         event.target.classList.add("divOver");
     }
 }
 
-function dragLeave(event){
-
+function dragLeave(event) {
+  if(event.target.className.contains('column')){
+    event.target.classList.remove("divOver");
+      console.log("leave");
+  }
 }
 
 function toggleInput(event){
