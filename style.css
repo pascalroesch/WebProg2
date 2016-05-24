@@ -65,6 +65,11 @@ h1{
     margin-right: 20px;
 }
 
+.draggedMenupoint{
+    opacity: 0.25;
+    transform: rotate(4deg);
+}
+
 #plus{
     height: 32px;
     width: 32px;
@@ -81,3 +86,4 @@ h1{
 [draggable = false]{
     cursor: default;
 }
+
