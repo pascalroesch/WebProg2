@@ -1,12 +1,22 @@
-function init () {
-
+function init() {
+  idCounter = 0;
 }
 
-function addCart () {
+function addCart() {
+
+    var elements = document.getElementsByClassName("column");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].addEventListener("dragend", dragEnd);
+      elements[i].addEventListener("dragenter", dragEnter);
+      elements[i].addEventListener("dragleave", dragLeave);
+    }
+
     var element = document.getElementById("ideas");
 
     var menupoint = document.createElement("span");
     menupoint.classList.add("menupoint");
+    menupoint.id = btoa(idCounter++);
+    console.log(menupoint);
 
     var cart = document.createElement("input");
     cart.placeholder = "Hier etwas eingeben";
@@ -26,13 +36,8 @@ function addCart () {
 
     addListeners(menupoint);
     
+    
     pen.addEventListener("click", toggleInput);
-
-    //Brauchen wir das hier noch? vvvvvvvvvv
-    // Toggle Button um zwischen Textfeld und statisch hin und her zu springen
-    /*var toggleInput = document.createElement("div");
-    toggleInput.classList.add("toggleInput");
-    element.appendChild(toggleInput);*/
 }
 
 function toggleDraggable(menupoint){
@@ -41,7 +46,7 @@ function toggleDraggable(menupoint){
 }
 
 
-function addListeners(menupoint){
+function addListeners(menupoint) {
     menupoint.lastChild.addEventListener("dragstart", dragStart);
     menupoint.lastChild.addEventListener("dragend", dragEnd);
     menupoint.lastChild.addEventListener("dragenter", dragEnter);
@@ -60,13 +65,18 @@ function dragStart(event){
     dragSource.style.opacity = '0.25';
 
     event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('text', event.target);
-    console.log(event.dataTransfer.getData('text'))
+    event.dataTransfer.setData('text/html', event.target.parentNode.id);
+    console.log(event.dataTransfer.getData('text/html'));
 }
 
-function dragEnd(event){
-    console.log("dragEnd");
-    this.parentNode.style.opacity = '1';
+function dragEnd(event) {
+  var data = event.dataTransfer.getData('text/html');
+
+  this.parentNode.style.opacity = '1';
+  
+  if (event.target.className == 'column') {
+    event.target.appendChild(data);
+  }
 }
 
 function dragEnter(event){
@@ -84,12 +94,12 @@ function dragLeave(event) {
   }
 }
 
-function toggleInput(event){
-    var parent = this.parentNode;
-    toggleDraggable(parent);
-    var cart = parent.firstChild;
+function toggleInput(event) {
+  var parent = this.parentNode;
+  toggleDraggable(parent);
+  var cart = parent.firstChild;
 
-    cart.readOnly = !(cart.readOnly); 
-    cart.classList.toggle("cartStyle");
+  cart.readOnly = !(cart.readOnly);
+  cart.classList.toggle("cartStyle");
 }
 
