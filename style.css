@@ -4,17 +4,23 @@ body{
 }
 
 h1{
-    display: block;
+    display: inline;
     text-align: center;
+}
+
+.title{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 40px;
 }
 
 .column {
 	width: 25%;
-    min-height: 80px;
+  min-height: 80px;
 	height: 100%;
 	background-color: #FF9812;
 	display:inline-block;	
-    vertical-align: text-top;
+  vertical-align: text-top;
 }
 
 .add {
@@ -36,38 +42,35 @@ h1{
     color: #000;
 }
 
-/*noch gebraucht? vvv*/
-.toggleInput{
-    width: 15px;
-    height: 15px;
-    background-color: #00ff00;
-    display: inline;
-}
-
 .menupoint{
-    display: block;
-    height: 40px;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    width: 100%; 
+    float: left;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 8px;
+    background-color: #FFA923;
+    border-radius: 5px;
 }
 
 .menupoint > *{
-    display: inline-block;
+    display: inline;
     position: relative;
-    height: 50%;
+}
+
+.menupoint > input{
+    float: left;
 }
 
 .pen{
+    float: right;
     height: 32px;
     width: 32px;
-    float: right;
-    margin-right: 20px;
 }
 
 .draggedMenupoint{
     opacity: 0.25;
-    transform: rotate(4deg);
+    transform: rotate(2deg);
 }
 
 #plus{
