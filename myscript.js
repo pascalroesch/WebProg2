@@ -1,4 +1,5 @@
 function init() {
+    console.log("INIT");
     idCounter = 0;
     
     //Fügt dragenter/-leave-EventListener für die Spalten hinzu
@@ -12,6 +13,8 @@ function init() {
 }
 
 function addCart() {
+    console.log("ADDCART");
+
     var ideas = document.getElementById("ideas");
     //Einfügen von Span, Inputfeld & Pen
     var menupoint = document.createElement("span");
