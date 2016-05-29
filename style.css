@@ -1,6 +1,15 @@
+html{
+    height: 100%; /* damit unsere Column-Divs auf 100% gesetzt werden können */
+}
+
 body{
-	text-align:center;
     font-family: helvetica, arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;	
+    height: 100%;
+    flex-direction: row; /* für smartphone version eventuell column statt row */
+    text-align: center;
 }
 
 h1{
@@ -15,12 +24,9 @@ h1{
 }
 
 .column {
-	width: 25%;
-  min-height: 80px;
 	height: 100%;
 	background-color: #FF9812;
-	display:inline-block;	
-  vertical-align: text-top;
+    width: 100%;
 }
 
 .add {
@@ -30,42 +36,21 @@ h1{
 
 .cartInput {
     font-size: 14px;
-    width: 80%;
-    margin-left: 5%;
+    width: 100%;
 }
 
 .cartStyle{
     box-shadow: 2px 2px 1px 1px #666666;
     border: 1px groove #666666;
-
     background-color: white;
     color: #000;
 }
 
 .menupoint{
-    float: left;
-    margin-left: 5%;
-    margin-right: 5%;
     width: 100%;
-    margin-bottom: 15px;
-    padding: 8px;
+    box-sizing: border-box; /* Damit menupoint nicht übersteht */
+    padding: 28px;
     background-color: #FFA923;
-    border-radius: 5px;
-}
-
-.menupoint > *{
-    display: inline;
-    position: relative;
-}
-
-.menupoint > input{
-    float: left;
-}
-
-.pen{
-    float: right;
-    height: 32px;
-    width: 32px;
 }
 
 .draggedMenupoint{
